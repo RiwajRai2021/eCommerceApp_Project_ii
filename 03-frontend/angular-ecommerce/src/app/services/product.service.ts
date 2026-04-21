@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../common/product';
-import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
 
   private baseUrl = 'http://localhost:8080/api/products?size=100';
+  private categoryUrl = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,14 +21,11 @@ export class ProductService {
     );
   }
 
- getProductListCategories(): Observable<ProductCategory[]> {
-  const categoryUrl = 'http://localhost:8080/api/product-category';
-
-  return this.httpClient.get<GetResponseProductCategory>(categoryUrl).pipe(
-    map(response => response._embedded.productCategory)
-  );
-}
-
+  getProductCategories(): Observable<ProductCategory[]> {
+    return this.httpClient.get<GetResponseCategories>(this.categoryUrl).pipe(
+      map(response => response._embedded.productCategory)
+    );
+  }
 }
 
 interface GetResponseProducts {
@@ -37,7 +34,7 @@ interface GetResponseProducts {
   }
 }
 
-interface GetResponseProductCategory{
+interface GetResponseCategories {
   _embedded: {
     productCategory: ProductCategory[];
   }
