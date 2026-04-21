@@ -1,47 +1,53 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Product } from '../../common/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './product-list-grid.component.html',
-  // templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
-
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
+  currentCategoryId: number = 1;
 
   constructor(
-  private productService: ProductService,
-  private cdr: ChangeDetectorRef
-) {
-  console.log("🔥 PRODUCT LIST COMPONENT CONSTRUCTOR FIRED");
-  console.log("INSTANCE ID:", Math.random());
-}
+    private productService: ProductService,
+    private route: ActivatedRoute,     // ✅ FIXED
+    private cdr: ChangeDetectorRef
+  ) {}
 
-
-
-  ngOnInit(): void {
-    this.listProducts();
+  ngOnInit() {
+    // 🔥 React to category changes
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    });
   }
 
   listProducts() {
-  this.productService.getProductList().subscribe(data => {
-    console.log("DATA RECEIVED FROM BACKEND:", data);
 
-    this.products = data;
+    // 🔥 Read category ID from URL
+    const hasCategoryId = this.route.snapshot.paramMap.has('id');
 
-    console.log("ASSIGNED TO this.products:", this.products);
-    console.log("LENGTH AFTER ASSIGN:", this.products.length);
+    if (hasCategoryId) {
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
+    } else {
+      this.currentCategoryId = 1;
+    }
 
-    this.cdr.detectChanges();   // ⭐ FORCE TEMPLATE UPDATE
-  });
-}
+    console.log("Current Category ID:", this.currentCategoryId);
 
-
+    // 🔥 Load products for this category
+    this.productService.getProductListByCategory(this.currentCategoryId)
+      .subscribe(data => {
+        console.log("DATA RECEIVED FROM BACKEND:", data);
+        this.products = data;
+        this.cdr.detectChanges();
+      });
+  }
 }

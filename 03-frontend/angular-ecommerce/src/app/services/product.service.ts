@@ -9,8 +9,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
+  [x: string]: any;
 
-  private baseUrl = 'http://localhost:8080/api/products?size=100';
+  // private baseUrl = 'http://localhost:8080/api/products?size=100';
+
+  private baseUrl = 'http://localhost:8080/api/products';
+
   private categoryUrl = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
@@ -26,6 +30,19 @@ export class ProductService {
       map(response => response._embedded.productCategory)
     );
   }
+  
+  getProductListByCategory(categoryId: number) {
+  // const searchUrl = `${this.baseUrl}/products/search/findByCategoryId?id=${categoryId}`;
+
+  const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
+
+
+
+  return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
+    map(response => response._embedded.products)
+  );
+}
+
 }
 
 interface GetResponseProducts {
