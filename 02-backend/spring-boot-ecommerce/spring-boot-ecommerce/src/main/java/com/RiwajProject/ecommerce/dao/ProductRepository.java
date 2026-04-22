@@ -18,5 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByCategoryId(@RequestParam("id") Long id);
 
+    Page<Product>findByNameContaining(@Param("name") String name, Pageable page);
+
 }
 
