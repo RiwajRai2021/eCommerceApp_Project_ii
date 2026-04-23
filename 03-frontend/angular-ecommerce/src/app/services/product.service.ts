@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
 
-  [x: string]: any;
+  // [x: string]: any;
 
   // private baseUrl = 'http://localhost:8080/api/products?size=100';
 
@@ -25,7 +25,7 @@ export class ProductService {
     // need to build URL based on category id 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`; 
 
-    return this.httpClient.get<GetResponseProducts>(this.baseUrl).pipe(
+    return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
   }
@@ -55,6 +55,11 @@ export class ProductService {
   return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
     map(response => response._embedded.products)
   );
+}
+
+getProduct(productId: number): Observable<Product> {
+  const productUrl = `${this.baseUrl}/${productId}`;
+  return this.httpClient.get<Product>(productUrl);
 }
 
 }

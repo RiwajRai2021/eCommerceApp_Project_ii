@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ProductCategory } from '../../common/product-category';
 import { ProductService } from '../../services/product.service';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-category-menu',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './product-category-menu.component.html',
   styleUrl: './product-category-menu.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush   // ✅ FIX
