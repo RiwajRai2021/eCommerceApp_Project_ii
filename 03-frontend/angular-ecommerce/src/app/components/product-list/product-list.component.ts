@@ -24,65 +24,38 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // 🔥 React to category changes
-    this.route.paramMap.subscribe(() => {
-      this.listProducts();
-    });
-  }
+  this.route.paramMap.subscribe(params => {
+    this.listProducts(params);
+  });
+}
 
-  listProducts() {
+listProducts(params: any) {
+  this.searchMode = params.has('keyword');
 
-    this.searchMode = this.route.snapshot.paramMap.has('keyword'); 
-
-    if(this.searchMode){
-      this.handleSearchProducts(); 
-
-    }
-    else{
-       this.handleListProducts(); 
-    }
-
-    
-  }
-
-  handleSearchProducts(){
-
-    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!; 
-
-    // now search for the producs using keyword 
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products = data; 
-      }
-
-    )
-
-  }
-
-  handleListProducts(){
-
-    // check if "id" parameter is avaialble
-    const hasCategoryId = this.route.snapshot.paramMap.has('id');
-
-    if (hasCategoryId) {
-      //get the "id" param string, convert string to a number using 
-      this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
-
-    } else {
-      //not category id avaiable...default to category id 1 
-      this.currentCategoryId = 1;
-      
-    }
-
-    console.log("Current Category ID:", this.currentCategoryId);
-
-    // 🔥 Load products for this category
-    this.productService.getProductListByCategory(this.currentCategoryId)
-      .subscribe(data => {
-        console.log("DATA RECEIVED FROM BACKEND:", data);
-        this.products = data;
-        this.cdr.detectChanges();
-      });
-
+  if (this.searchMode) {
+    this.handleSearchProducts(params.get('keyword')!);
+  } else {
+    this.handleListProducts(params.get('id'));
   }
 }
+
+handleSearchProducts(theKeyword: string) {
+  this.productService.searchProducts(theKeyword).subscribe(data => {
+    this.products = data;
+  });
+}
+
+handleListProducts(id: string | null) {
+  this.currentCategoryId = id ? +id : 1;
+
+  console.log("Current Category ID:", this.currentCategoryId);
+
+  this.productService.getProductListByCategory(this.currentCategoryId)
+    .subscribe(data => {
+      console.log("DATA RECEIVED FROM BACKEND:", data);
+      this.products = data;
+      this.cdr.detectChanges();
+    });
+  }
+}
+

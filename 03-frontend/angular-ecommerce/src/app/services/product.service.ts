@@ -10,63 +10,55 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
 
-  // [x: string]: any;
-
-  // private baseUrl = 'http://localhost:8080/api/products?size=100';
-
   private baseUrl = 'http://localhost:8080/api/products';
-
   private categoryUrl = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
   getProductList(theCategoryId: number): Observable<Product[]> {
-
-    // need to build URL based on category id 
-    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`; 
-
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
-      map(response => response._embedded.products)
+      map(response => this.extractId(response._embedded.products))
     );
   }
 
   searchProducts(keyword: string): Observable<Product[]> {
-  const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
-
-  return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
-    map(response => response._embedded.products)
-  );
-}
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
+      map(response => this.extractId(response._embedded.products))
+    );
+  }
 
   getProductCategories(): Observable<ProductCategory[]> {
-    
     return this.httpClient.get<GetResponseCategories>(this.categoryUrl).pipe(
       map(response => response._embedded.productCategory)
     );
   }
-  
-  getProductListByCategory(categoryId: number) {
-  // const searchUrl = `${this.baseUrl}/products/search/findByCategoryId?id=${categoryId}`;
 
-  const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
+  getProductListByCategory(categoryId: number): Observable<Product[]> {
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
+      map(response => this.extractId(response._embedded.products))
+    );
+  }
 
+  getProduct(productId: number): Observable<Product> {
+    const productUrl = `${this.baseUrl}/${productId}`;
+    return this.httpClient.get<Product>(productUrl);
+  }
 
-
-  return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
-    map(response => response._embedded.products)
-  );
-}
-
-getProduct(productId: number): Observable<Product> {
-  const productUrl = `${this.baseUrl}/${productId}`;
-  return this.httpClient.get<Product>(productUrl);
-}
+  private extractId(products: any[]): Product[] {
+    return products.map(p => {
+      p.id = +p._links.self.href.split('/').pop()!;
+      return p as Product;
+    });
+  }
 
 }
 
 interface GetResponseProducts {
   _embedded: {
-    products: Product[];
+    products: any[];
   }
 }
 

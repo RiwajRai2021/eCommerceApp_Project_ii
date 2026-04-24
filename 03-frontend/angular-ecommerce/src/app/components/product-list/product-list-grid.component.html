@@ -9,7 +9,7 @@
       <!-- Show products when available -->
       @if (products.length > 0) {
         <div class="row">
-          @for (tempProduct of products; track tempProduct) {
+          @for (tempProduct of products; track tempProduct.id) {
             <div class="col-md-3">
               <div class="product-box">
                 <a [routerLink]="['/products', tempProduct.id]">

@@ -1,9 +1,10 @@
-<!-- <h1>Products</h1>
+<div class="product-list">
+  <div *ngFor="let product of products" class="product-card">
+    <a [routerLink]="['/products', product.id]">
+      <img [src]="product.imageUrl" [alt]="product.name" />
+      <h3>{{ product.name }}</h3>
+    </a>
 
-<p *ngFor="let tempProduct of products">
-  {{ tempProduct.name }}: {{ tempProduct.unitPrice | currency: 'USD' }}
-</p> -->
-<!-- 
-<p>I have work to do</p> -->
-
-<p>I have work to do</p>
+    <p>{{ product.unitPrice | currency: 'USD' }}</p>
+  </div>
+</div>
