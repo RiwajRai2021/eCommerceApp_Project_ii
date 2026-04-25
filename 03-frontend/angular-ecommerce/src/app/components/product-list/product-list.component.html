@@ -1,4 +1,6 @@
 <div class="product-list">
+  <!-- Add this -->
+  <div *ngIf="products.length === 0">No products available.</div>
   <div *ngFor="let product of products" class="product-card">
     <a [routerLink]="['/products', product.id]">
       <img [src]="product.imageUrl" [alt]="product.name" />

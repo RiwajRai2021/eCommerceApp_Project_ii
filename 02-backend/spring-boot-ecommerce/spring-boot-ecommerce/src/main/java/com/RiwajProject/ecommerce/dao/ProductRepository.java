@@ -16,9 +16,8 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "products", path = "products")
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findByCategoryId(@RequestParam("id") Long id);
+    Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
 
-    Page<Product>findByNameContaining(@Param("name") String name, Pageable page);
+    Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 
 }
-
