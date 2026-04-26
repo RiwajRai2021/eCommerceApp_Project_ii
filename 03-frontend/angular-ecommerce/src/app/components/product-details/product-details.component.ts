@@ -3,6 +3,7 @@ import { Product } from '../../common/product';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -18,8 +19,13 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private location:Location
   ) {}
+
+  goBack() {
+  this.location.back();  // 👈 add this method
+}
 
   ngOnInit(): void {
     // Handle initial load (direct URL / refresh)

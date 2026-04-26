@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Product } from '../../common/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr:ChangeDetectorRef 
   ) {}
 
   ngOnInit() {
@@ -46,32 +47,42 @@ export class ProductListComponent implements OnInit {
   handleSearchProducts(theKeyword: string) {
     this.productService.searchProducts(theKeyword).subscribe(data => {
       this.products = data;
+      this.cdr.detectChanges()
     });
   }
 
   handleListProducts(id: string | null) {
-  this.currentCategoryId = id ? +id : 1;
+    this.currentCategoryId = id ? +id : 1;
 
-  if (this.previousCategoryId != this.currentCategoryId) {
-    this.thePageNumber = 1;
+    if (this.previousCategoryId != this.currentCategoryId) {
+      this.thePageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+
+    console.log(`Fetching category: ${this.currentCategoryId}, page: ${this.thePageNumber - 1}`);
+
+    this.productService.getProductListPaginate(
+      this.thePageNumber - 1,
+      this.thePageSize,
+      this.currentCategoryId
+    ).subscribe({
+      next: data => {
+        console.log('Raw API response:', data);
+        console.log('Products array:', data._embedded?.products);
+        this.products = data._embedded?.products ?? [];
+        this.thePageNumber = (data.page?.number ?? 0) + 1;
+        this.thePageSize = data.page?.size ?? 10;
+        this.theTotalElements = data.page?.totalElements ?? 0;
+        this.cdr.detectChanges();
+        console.log('this.products after set:', this.products);
+      },
+      error: err => console.error('API Error:', err)
+    });
   }
 
-  this.previousCategoryId = this.currentCategoryId;
-
-  this.productService.getProductListPaginate(
-  this.thePageNumber - 1,
-  this.thePageSize,
-  this.currentCategoryId
-).subscribe(data => {
-  this.products = data._embedded.products;
-  this.thePageNumber = data.page.number + 1;
-  this.thePageSize = data.page.size;
-  this.theTotalElements = data.page.totalElements;
-});
-}
-  updatePageNumber(pageNumber: number) {
+  updatePageNumber(pageNumber: number) {  // 👈 this was missing
     this.thePageNumber = pageNumber;
     this.handleListProducts(String(this.currentCategoryId));
   }
-
 }

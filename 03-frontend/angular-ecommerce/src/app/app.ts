@@ -4,12 +4,19 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductCategoryMenuComponent } from "./components/product-category-menu/product-category-menu.component";
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { SearchComponent} from "./components/search/search.component";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CartStatus } from "./components/cart-status/cart-status.component"; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductListComponent, ProductCategoryMenuComponent, SearchComponent, RouterOutlet, NgbModule],
+  imports: [ProductListComponent, 
+            ProductCategoryMenuComponent, 
+            SearchComponent,
+             RouterOutlet, 
+             NgbModule, 
+             CartStatus
+            ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
