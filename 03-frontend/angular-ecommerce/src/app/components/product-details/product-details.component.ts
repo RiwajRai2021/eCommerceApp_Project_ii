@@ -4,6 +4,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Location } from '@angular/common';
+import { CartService } from '../../services/cart.services';
+import { CartItem } from '../../common/cart-item';
 
 @Component({
   selector: 'app-product-details',
@@ -18,23 +20,18 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private location:Location
+    private location: Location
   ) {}
 
   goBack() {
-  this.location.back();  // 👈 add this method
-}
+    this.location.back();
+  }
 
   ngOnInit(): void {
-    // Handle initial load (direct URL / refresh)
-    const initialId = +this.route.snapshot.paramMap.get('id')!;
-    if (initialId) {
-      this.handleProductDetails(initialId);
-    }
-
-    // Handle navigation between products
+    // ✅ paramMap.subscribe handles both initial load AND navigation changes
     this.route.paramMap.subscribe(params => {
       const theProductId: number = +params.get('id')!;
       if (theProductId) {
@@ -50,4 +47,18 @@ export class ProductDetailsComponent implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  addToCart(){
+  console.log('addToCart() called');        // ✅ is this logging?
+  console.log('product:', this.product);    // ✅ is product defined?
+  
+  if(!this.product){
+    console.log('product is undefined!'); 
+    return; 
+  }
+
+  console.log(`Adding to cart: ${this.product.name}, ${this.product.unitPrice}`); 
+  const theCartItem = new CartItem(this.product); 
+  this.cartService.addToCart(theCartItem); 
+}
 }
