@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core'; // ✅ import OnInit
-import { CartService } from '../../services/cart.services';
+import { CartService } from '../../services/cart.service';
 import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-cart-status',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './cart-status.component.html',
   styleUrl: './cart-status.component.css',
 })
-export class CartStatusComponent implements OnInit { // ✅ implement OnInit
+export class CartStatusComponent implements OnInit { 
 
   totalPrice: number = 0.00; 
   totalQuantity: number = 0; 

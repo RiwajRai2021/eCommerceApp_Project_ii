@@ -1,0 +1,3 @@
+/* These would cause the problem — remove or override them
+.main-content { max-width: 600px; }
+.section-content { width: fit-content; } */

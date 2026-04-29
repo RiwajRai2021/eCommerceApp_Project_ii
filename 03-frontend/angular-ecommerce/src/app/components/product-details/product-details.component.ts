@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Location } from '@angular/common';
-import { CartService } from '../../services/cart.services';
+import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../common/cart-item';
 
 @Component({

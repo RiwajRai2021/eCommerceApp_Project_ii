@@ -1,0 +1,314 @@
+<div class="main-content" style="margin-left: 20px; width: 100%; padding-left: 50px">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+        <!-- customer form group -->
+        <div
+          formGroupName="customer"
+          style="
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 25px 40px;
+            margin-bottom: 20px;
+            max-width: 1100px;
+            width: 100%;
+          "
+        >
+          <h3
+            style="
+              color: #333;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #ddd;
+              padding-bottom: 10px;
+            "
+          >
+            Customer
+          </h3>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">First Name</label>
+            </div>
+            <div class="col">
+              <input formControlName="firstName" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Last Name</label>
+            </div>
+            <div class="col">
+              <input formControlName="lastName" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Email</label>
+            </div>
+            <div class="col">
+              <input formControlName="email" type="email" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <!-- shipping address form group -->
+        <div
+          formGroupName="shippingAddress"
+          style="
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 25px 40px;
+            margin-bottom: 20px;
+            max-width: 1100px;
+            width: 100%;
+          "
+        >
+          <h3
+            style="
+              color: #333;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #ddd;
+              padding-bottom: 10px;
+            "
+          >
+            Shipping Address
+          </h3>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Country</label>
+            </div>
+            <div class="col">
+              <select formControlName="country" class="form-control">
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Street</label>
+            </div>
+            <div class="col">
+              <input formControlName="street" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">City</label>
+            </div>
+            <div class="col">
+              <input formControlName="city" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">State</label>
+            </div>
+            <div class="col">
+              <select formControlName="state" class="form-control">
+                <option value="AL">Alabama</option>
+                <option value="CA">California</option>
+                <option value="FL">Florida</option>
+                <option value="NY">New York</option>
+                <option value="TX">Texas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Zip Code</label>
+            </div>
+            <div class="col">
+              <input formControlName="zipcode" type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <!-- billing address form group -->
+        <div
+          formGroupName="billingAddress"
+          style="
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 25px 40px;
+            margin-bottom: 20px;
+            max-width: 1100px;
+            width: 100%;
+          "
+        >
+          <h3
+            style="
+              color: #333;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #ddd;
+              padding-bottom: 10px;
+            "
+          >
+            Billing Address
+          </h3>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Country</label>
+            </div>
+            <div class="col">
+              <select formControlName="country" class="form-control">
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Street</label>
+            </div>
+            <div class="col">
+              <input formControlName="street" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">City</label>
+            </div>
+            <div class="col">
+              <input formControlName="city" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">State</label>
+            </div>
+            <div class="col">
+              <select formControlName="state" class="form-control">
+                <option value="AL">Alabama</option>
+                <option value="CA">California</option>
+                <option value="FL">Florida</option>
+                <option value="NY">New York</option>
+                <option value="TX">Texas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Zip Code</label>
+            </div>
+            <div class="col">
+              <input formControlName="zipcode" type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <!-- credit card form group -->
+        <div
+          formGroupName="creditCard"
+          style="
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 25px 40px;
+            margin-bottom: 20px;
+            max-width: 1100px;
+            width: 100%;
+          "
+        >
+          <h3
+            style="
+              color: #333;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #ddd;
+              padding-bottom: 10px;
+            "
+          >
+            Credit Card
+          </h3>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Card Type</label>
+            </div>
+            <div class="col">
+              <select formControlName="cardType" class="form-control">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Name on Card</label>
+            </div>
+            <div class="col">
+              <input formControlName="nameOnCard" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Card Number</label>
+            </div>
+            <div class="col">
+              <input formControlName="cardNumber" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Security Code</label>
+            </div>
+            <div class="col">
+              <input formControlName="securityCode" type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Expiration Month</label>
+            </div>
+            <div class="col">
+              <select formControlName="expirationMonth" class="form-control">
+                <option *ngFor="let m of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" [value]="m">
+                  {{ m }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-3">
+            <div style="width: 150px; min-width: 150px; text-align: right; padding-right: 20px">
+              <label style="font-weight: bold; white-space: nowrap">Expiration Year</label>
+            </div>
+            <div class="col">
+              <select formControlName="expirationYear" class="form-control">
+                <option *ngFor="let y of [2024, 2025, 2026, 2027, 2028, 2029]" [value]="y">
+                  {{ y }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- submit button -->
+        <div class="text-center mt-4" style="max-width: 1100px">
+          <button type="submit" class="btn btn-info">Purchase</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

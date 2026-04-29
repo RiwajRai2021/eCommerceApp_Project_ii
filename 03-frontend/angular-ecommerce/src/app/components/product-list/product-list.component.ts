@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CartItem } from '../../common/cart-item';
-import { CartService } from '../../services/cart.services';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
