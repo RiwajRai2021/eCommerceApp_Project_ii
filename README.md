@@ -93,4 +93,23 @@ spring.jpa.show-sql=true
 
 The backend will run at `http://localhost:8080`
 
+### Frontend Setup
+
+1. Navigate to the frontend folder:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Run the application:
+```bash
+ng serve
+```
+
+The app will run at `http://localhost:4200`
+
 
