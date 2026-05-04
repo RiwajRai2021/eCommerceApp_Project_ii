@@ -118,9 +118,3 @@ npm install
 - 📱 Make the application fully responsive for mobile devices
 - 💬 Add product reviews and ratings
 - 🔔 Implement order tracking and notifications
-ng serve
-```
-
-The app will run at `http://localhost:4200`
-
-
