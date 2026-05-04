@@ -110,6 +110,7 @@ npm install
 
 ## Future Improvements
 
+
 - 🔐 Implement secure authentication for customers and admins
 - 👤 Build admin panel for managing product listings and inventory
 - 📦 Containerize the application with Docker
