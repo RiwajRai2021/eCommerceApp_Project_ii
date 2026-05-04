@@ -7,7 +7,7 @@ add items to cart, and complete purchases seamlessly.
 
 **Scope: Solo project – Designed and developed full frontend and backend**
 
-🎥 Demo Video
+🎥 Demo Video (click here -->)
 https://drive.google.com/file/d/1qYDMjtVOd14jyRVqVKpqRQrdvl0gc_xt/view?usp=sharing
 
 ![App creenshot](https://github.com/RiwajRai2021/eCommerceApp_Project_ii/blob/main/screenshot_ecommerce_app.png)
