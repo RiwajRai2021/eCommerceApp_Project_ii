@@ -13,17 +13,16 @@ https://drive.google.com/file/d/1qYDMjtVOd14jyRVqVKpqRQrdvl0gc_xt/view?usp=shari
 ![App creenshot](https://github.com/RiwajRai2021/eCommerceApp_Project_ii/blob/main/screenshot_ecommerce_app.png)
 <br><br>
 
-📑 Table of Contents
-
+## 📑 Table of Contents
+- [Overview](#overview)
+- [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Project Data‑Flow](#project-data-flow)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Clone the Repository](#clone-the-repository)
-  - [Set Up Environment Variables](#set-up-environment-variables)
-- [Environment Variables Setup](#environment-variables-setup)
-- [Cloud Deployment Flow](#cloud-deployment-flow)
-- [Testing](#testing)
-
-  <br>
+  - [Backend Setup](#backend-setup)
+  - [Frontend Setup](#frontend-setup)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
