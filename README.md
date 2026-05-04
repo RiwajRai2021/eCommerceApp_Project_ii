@@ -70,4 +70,27 @@ add items to cart, and complete purchases seamlessly.
 git clone https://github.com/yourusername/ecommerce-app.git
 cd ecommerce-app
 ```
+### Backend Setup
+
+1. Navigate to the backend folder:
+```bash
+cd backend
+```
+
+2. Configure your MySQL database in `src/main/resources/application.properties`:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+3. Run the backend:
+```bash
+./mvnw spring-boot:run
+```
+
+The backend will run at `http://localhost:8080`
+
 
