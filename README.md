@@ -35,4 +35,13 @@ add items to cart, and complete purchases seamlessly.
 
 **Scope: Solo project – Designed and developed full frontend and backend**
 
+## Features
+
+- 🛍️ Browse products across multiple categories (Books, Coffee Mugs, Mouse Pads, Luggage Tags)
+- 🔍 Search products by name
+- 🛒 Add items to shopping cart
+- 💳 Complete purchases seamlessly
+- 🖥️ Responsive and clean user interface
+
+
 
