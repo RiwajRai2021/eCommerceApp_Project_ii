@@ -43,5 +43,25 @@ add items to cart, and complete purchases seamlessly.
 - 💳 Complete purchases seamlessly
 - 🖥️ Responsive and clean user interface
 
+## Tech Stack
 
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| Angular | UI Framework |
+| TypeScript | Programming Language |
+| HTML & CSS | Structure & Styling |
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| Java | Programming Language |
+| Spring Boot | Backend Framework |
+| Spring Data JPA | Database ORM |
+| REST API | Communication |
+
+### Database
+| Technology | Purpose |
+|------------|---------|
+| MySQL | Relational Database |
 
