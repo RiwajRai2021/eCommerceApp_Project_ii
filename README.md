@@ -107,6 +107,17 @@ npm install
 
 3. Run the application:
 ```bash
+
+## Future Improvements
+
+- 🔐 Implement secure authentication for customers and admins
+- 👤 Build admin panel for managing product listings and inventory
+- 📦 Containerize the application with Docker
+- ⚙️ Set up CI/CD pipeline with Jenkins
+- ☁️ Deploy on AWS for scalable cloud hosting
+- 📱 Make the application fully responsive for mobile devices
+- 💬 Add product reviews and ratings
+- 🔔 Implement order tracking and notifications
 ng serve
 ```
 
