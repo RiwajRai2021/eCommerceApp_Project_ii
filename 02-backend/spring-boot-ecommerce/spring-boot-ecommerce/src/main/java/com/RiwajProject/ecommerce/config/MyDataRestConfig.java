@@ -3,7 +3,6 @@ package com.RiwajProject.ecommerce.config;
 import com.RiwajProject.ecommerce.entity.Product;
 import com.RiwajProject.ecommerce.entity.ProductCategory;
 import jakarta.persistence.EntityManager;
-
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,54 +18,56 @@ import java.util.Set;
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
-    public MyDataRestConfig(EntityManager theEntityManager){
-        entityManager = theEntityManager;
+    public MyDataRestConfig(EntityManager theEntityManager) {
+        this.entityManager = theEntityManager;
     }
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
-        HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
+        HttpMethod[] theUnsupportedActions = {
+                HttpMethod.PUT,
+                HttpMethod.POST,
+                HttpMethod.DELETE,
+                HttpMethod.PATCH
+        };
 
-        // disable HTTP methods for Product: PUT, POST, DELETE and PATCH
-        config.getExposureConfiguration()
-                .forDomainType(Product.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+        // Disable HTTP methods for Product and ProductCategory
+        disableHttpMethods(Product.class, config, theUnsupportedActions);
+        disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
 
-        // disable HTTP methods for ProductCategory: PUT, POST, DELETE and PATCH
-        config.getExposureConfiguration()
-                .forDomainType(ProductCategory.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
-
-        // call an internal helper method
+        // Expose entity IDs
         exposeIds(config);
+
+        // ← ADD THIS
+        cors.addMapping("/api/**")
+                .allowedOrigins("http://localhost:4200");
     }
 
-    private void exposeIds(RepositoryRestConfiguration config){
+    // Reusable helper method to disable HTTP methods
+    private void disableHttpMethods(Class<?> domainType, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {
+        config.getExposureConfiguration()
+                .forDomainType(domainType)
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
+    }
 
-        //expose entity ids
-        //
+    private void exposeIds(RepositoryRestConfiguration config) {
 
-        // - get a list of all entity classes from the entity manager
+        // Get all entity classes from the entity manager
         Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
-        //- create an array of the entity types
-        List<Class>entityClasses = new ArrayList<>();
-
-        // - get the entity types for the entities
-        for(EntityType tempEntityType: entities){
-            entityClasses.add(tempEntityType.getJavaType());
+        // Create list and populate with entity Java types
+        List<Class> entityClasses = new ArrayList<>();
+        for (EntityType<?> entityType : entities) {
+            entityClasses.add(entityType.getJavaType());
         }
 
-
-        // - expose the entity ids for the array of entity/domain types
+        // Expose the entity IDs for all domain types
         Class[] domainTypes = entityClasses.toArray(new Class[0]);
         config.exposeIdsFor(domainTypes);
-
     }
-} 
+}

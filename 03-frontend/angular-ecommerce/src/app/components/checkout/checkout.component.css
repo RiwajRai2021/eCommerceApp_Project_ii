@@ -1,0 +1,28 @@
+.form-area {
+  border: 2px solid #ccc;
+}
+
+.main-content,
+.page-m,
+.section-content,
+.section-content-p30 {
+  border: none;
+}
+
+.form-area h3 {
+  display: block !important;
+  margin-top: 20px !important;
+  padding-top: 0 !important;
+  visibility: visible !important;
+}
+
+.form-area .row label {
+    display: inline-block;
+    width: 300px;
+    font-size: 14px;
+}
+
+.credit-card-area .row label {
+    width: 400px;
+    margin-right: 90px;
+}

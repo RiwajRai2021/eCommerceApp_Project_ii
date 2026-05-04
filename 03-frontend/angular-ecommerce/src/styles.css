@@ -567,6 +567,7 @@ input.au-input.au-input-xl{
  */
 
 .form-area{
+    margin-top: 40px;
     background:#e5e5e5;
     position:relative;
     margin-bottom:45px;
@@ -691,10 +692,8 @@ table.table.table-bordered{
     border:1px solid #dee2e6
 }
 table.table.table-bordered th{
-    BACKGROUND:#0da8e4;
+     background:#c0392b;
     color:#fff;
-    font-size:14px;
-    padding:7px
 }
 .table-responsive{
     padding-right:1px
@@ -736,11 +735,16 @@ table.table.table-bordered th{
  * Buttons
  * ----------------------------
  */
+.btn-info{
+    color:#fff!important;
+    background-color:#1a1a1a!important;
+    border-color:#1a1a1a!important;
+    font-weight:600;
+}
+.btn-info:hover{
+    background-color:#e74c3c!important;
+    border-color:#e74c3c!important;
 
- .btn-info{
-    color:#fff;
-    background-color:#0da8e4!important;
-    border-color:#0da8e4!important
 }
 a.primary-btn{
     background:#05143f;
@@ -875,10 +879,7 @@ footer ul li{
         text-align:center
     }
     .header-desktop{
-        position:relative;
-        top:0;
-        left:0;
-        height:80px
+        background:#c0392b;
     }
     .header-wrap{
         -webkit-box-orient:vertical;

@@ -1,0 +1,35 @@
+/* Each product card should be a fixed-height flex column */
+.product-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+/* Force all images to the same size */
+.product-box img {
+  width: 100%;
+  max-width: 150px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Push price and button to the bottom */
+.product-box .product-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make all Bootstrap columns equal height */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-3 {
+  display: flex;
+  margin-bottom: 20px;
+}
