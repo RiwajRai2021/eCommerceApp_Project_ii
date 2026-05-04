@@ -65,3 +65,9 @@ add items to cart, and complete purchases seamlessly.
 |------------|---------|
 | MySQL | Relational Database |
 
+### Clone the Repository
+```bash
+git clone https://github.com/yourusername/ecommerce-app.git
+cd ecommerce-app
+```
+
